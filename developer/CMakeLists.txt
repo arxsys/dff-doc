@@ -39,6 +39,8 @@ if (DOXYGEN_FOUND)
   set (DOC_HTML_OUTPUT_FILE "index.html")
   set (DOC_QCH_OUTPUT_FILE "developer.qch")
 
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/qch) 
+
   foreach (type ${DOC_OUTPUT_TYPES})
     foreach (i ${DOC_OUTPUT_TYPES})
       set (DOC_${i}_OUTPUT "NO")
