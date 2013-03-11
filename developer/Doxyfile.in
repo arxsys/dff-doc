@@ -180,8 +180,8 @@ CHM_INDEX_ENCODING     =
 BINARY_TOC             = NO
 TOC_EXPAND             = NO
 
-GENERATE_QHP           = @DOC_QCH_OUTPUT@ 
-QCH_FILE               = ../qch/dff_developer.qch 
+GENERATE_QHP           = @DOC_QCH_OUTPUT@
+QCH_FILE               = ../qch/@DOC_QCH_OUTPUT_FILE@
 QHP_NAMESPACE          = www.digital-forensic.org
 QHP_VIRTUAL_FOLDER     = developer 
 QHP_CUST_FILTER_NAME   = 

@@ -31,42 +31,40 @@ set (SOURCES
 
 find_package(Doxygen)
 if (DOXYGEN_FOUND)
+##XXX
+  set (DOC_OUTPUT_TYPES HTML QCH) #LATEX
+
   string (REPLACE ";" " " DOC_SOURCE_FILES "${SOURCES}")
   set (DOC_VERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
   set (DOC_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
   set (DOC_LOGO_FILE ${CMAKE_SOURCE_DIR}/"ressources/dff.png")
-  set (DOC_OUTPUT_TYPES HTML QCH)
   set (DOC_HTML_OUTPUT_FILE "index.html")
-  set (DOC_QCH_OUTPUT_FILE "developer.qch")
+  set (DOC_QCH_OUTPUT_FILE "dff_developer.qch")
+  set (DOC_LATEX_OUTPUT_FILE "refman.tex")
 
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/qch) 
-
   foreach (type ${DOC_OUTPUT_TYPES})
-    foreach (i ${DOC_OUTPUT_TYPES})
-      set (DOC_${i}_OUTPUT "NO")
-    endforeach (i)
     set (DOC_${type}_OUTPUT "YES")
-    configure_file (
+    string (TOLOWER "${type}" type_low)
+    set (DOC_${type}_OUTPUT_FILE_ABS "${CMAKE_CURRENT_BINARY_DIR}/${type_low}/${DOC_${type}_OUTPUT_FILE}")
+    add_custom_target (doc.developer.${type_low} DEPENDS ${DOC_${type}_OUTPUT_FILE_ABS})
+    add_dependencies (doc.developer doc.developer.${type_low})
+    list (APPEND DOC_OUTPUT_FILES_ABS "${DOC_${type}_OUTPUT_FILE_ABS}")
+  endforeach (type)
+  configure_file (
       ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
-      ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile_${type}
+      ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
       @ONLY
     )
-    if (DOC_${type}_OUTPUT_FILE)
-      string (TOLOWER "${type}" type_low)
-      set (DOC_${type}_OUTPUT_FILE_ABS "${CMAKE_CURRENT_BINARY_DIR}/${type_low}/${DOC_${type}_OUTPUT_FILE}")
 
-      add_custom_command (OUTPUT "${DOC_${type}_OUTPUT_FILE_ABS}"
-          COMMAND "${DOXYGEN_EXECUTABLE}" "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile_${type}"
-          DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile_${type}" ${SOURCES}
-          VERBATIM
-      )
+  add_custom_command (
+      OUTPUT ${DOC_OUTPUT_FILES_ABS}
+      COMMAND "${DOXYGEN_EXECUTABLE}" "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
+      DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" ${SOURCES}
+      VERBATIM
+  )
 
-      add_custom_target (doc.developer.${type_low} DEPENDS ${DOC_${type}_OUTPUT_FILE_ABS})
-    endif (DOC_${type}_OUTPUT_FILE)
-  endforeach (type)
-
-  set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "html;DFF_developer.qch")
-  add_dependencies (doc.developer doc.developer.html)
+  set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "html;qch/dff_developer.qch;Doxyfile")
 
   install (DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
     DESTINATION ${DOCUMENTATION_INSTALL_DIR}
