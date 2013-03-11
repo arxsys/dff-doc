@@ -42,7 +42,6 @@ if (DOXYGEN_FOUND)
   set (DOC_QCH_OUTPUT_FILE "dff_developer.qch")
   set (DOC_LATEX_OUTPUT_FILE "refman.tex")
 
-  file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/qch) 
   foreach (type ${DOC_OUTPUT_TYPES})
     set (DOC_${type}_OUTPUT "YES")
     string (TOLOWER "${type}" type_low)
