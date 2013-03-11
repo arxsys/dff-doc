@@ -59,12 +59,12 @@ if (DOXYGEN_FOUND)
           VERBATIM
       )
 
-      add_custom_target (developer.doc.${type_low} DEPENDS ${DOC_${type}_OUTPUT_FILE_ABS})
+      add_custom_target (doc.developer.${type_low} DEPENDS ${DOC_${type}_OUTPUT_FILE_ABS})
     endif (DOC_${type}_OUTPUT_FILE)
   endforeach (type)
 
   set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "html;DFF_developer.qch")
-  add_dependencies (doc.developer developer.doc.html)
+  add_dependencies (doc.developer doc.developer.html)
 
   install (DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
     DESTINATION ${DOCUMENTATION_INSTALL_DIR}
