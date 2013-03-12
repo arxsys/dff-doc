@@ -31,7 +31,7 @@ if (QHELPGENERATOR_EXECUTABLE)
                       COMMAND ${QCOLLECTIONGENERATOR_EXECUTABLE} dff_doc.qhcp -o dff_doc.qhc 
                       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                      )
-    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES dff_doc.qhc)
+    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "dff_doc.qhc;dff_guide_en.qch")
     endif (QCOLLECTIONGENERATOR_EXECUTABLE)
 endif (QHELPGENERATOR_EXECUTABLE)
 

@@ -181,7 +181,7 @@ BINARY_TOC             = NO
 TOC_EXPAND             = NO
 
 GENERATE_QHP           = @DOC_QCH_OUTPUT@
-QCH_FILE               = ../../qhc/@DOC_QCH_OUTPUT_FILE@
+QCH_FILE               = @DOC_QCH_OUTPUT_FILE@
 QHP_NAMESPACE          = www.digital-forensic.org
 QHP_VIRTUAL_FOLDER     = developer 
 QHP_CUST_FILTER_NAME   = 

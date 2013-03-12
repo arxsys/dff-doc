@@ -33,7 +33,7 @@ if (BUILD_DFF_GUIDE_HTML)
 endif (BUILD_DFF_GUIDE_HTML)
 
 if (DFF_GUIDE_FILES)
-  set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${DFF_GUIDE_FILES})
+  set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "*.html")
   add_custom_target(doc.guide.en.html DEPENDS ${DFF_GUIDE_FILES})
   add_dependencies(doc.guide.en doc.guide.en.html)
 endif (DFF_GUIDE_FILES)
