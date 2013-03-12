@@ -18,7 +18,7 @@ if (Docbook_FOUND)
   option (BUILD_DFF_GUIDE_HTML "Build HTML application guide" ON)
   option (BUILD_DFF_GUIDE_QCH  "Build QCH application guide" ON)
   add_custom_target(doc.guide)
-  add_dependencies(doc doc.guide)
+  add_dependencies(doc.guide doc)
   add_subdirectory(en)
 endif (Docbook_FOUND)
 

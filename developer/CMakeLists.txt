@@ -13,7 +13,7 @@
 #  Solal Jacob <sja@digital-forensic.org>
 
 add_custom_target(doc.developer)
-add_dependencies(doc doc.developer)
+add_dependencies(doc.developer doc)
 
 set (SOURCES
  "${CMAKE_SOURCE_DIR}/dff/api/include/vfs.hpp"
@@ -31,7 +31,6 @@ set (SOURCES
 
 find_package(Doxygen)
 if (DOXYGEN_FOUND)
-##XXX
   set (DOC_OUTPUT_TYPES HTML QCH) #LATEX
 
   string (REPLACE ";" " " DOC_SOURCE_FILES "${SOURCES}")
@@ -63,7 +62,7 @@ if (DOXYGEN_FOUND)
       VERBATIM
   )
 
-  set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "html;qch/dff_developer.qch;Doxyfile")
+  set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "html;qch/dff_developer.qch")
 
   install (DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
     DESTINATION ${DOCUMENTATION_INSTALL_DIR}

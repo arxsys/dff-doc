@@ -13,19 +13,26 @@
 #  Solal Jacob <sja@digital-forensic.org>
 
 add_custom_target(doc.qhc)
-add_dependencies(doc.guide.en.html doc.qhc)
-add_dependencies(doc.developer  doc.qhc)
-
-#SHOULD BE CONSTRUCT AFTER BUILD BECAUSE NEED DEVELOPER WHO IS BUILD AFTER BUILD NOTE IN GENERIC
+add_dependencies(doc doc.qhc)
 
 find_program(QHELPGENERATOR_EXECUTABLE qhelpgenerator)
 if (QHELPGENERATOR_EXECUTABLE)
-    execute_process(COMMAND ${QHELPGENERATOR_EXECUTABLE} dff_guide_en.qhp -o ../../qhc/dff_guide_en.qch WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../guide/en)
+    add_custom_target(doc.guide.en.qhc
+                      DEPENDS doc.guide.en.html
+                      COMMAND ${QHELPGENERATOR_EXECUTABLE} dff_guide_en.qhp -o ../../qhc/dff_guide_en.qch 
+                      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../guide/en
+                     )
     set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES dff_guide_en.qch) 
-    find_program(QCOLLECTIONGENERATOR_EXECUTABLE qcollectiongenerator)
 
+    find_program(QCOLLECTIONGENERATOR_EXECUTABLE qcollectiongenerator)
     if (QCOLLECTIONGENERATOR_EXECUTABLE)
-      execute_process(COMMAND ${QCOLLECTIONGENERATOR_EXECUTABLE} dff_doc.qhcp -o dff_doc.qhc WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-      set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES dff_doc.qhc)
+    add_custom_target(doc.qhc.collection
+                      DEPENDS doc.guide.en.qhc doc.developer.qch
+                      COMMAND ${QCOLLECTIONGENERATOR_EXECUTABLE} dff_doc.qhcp -o dff_doc.qhc 
+                      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                     )
+    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES dff_doc.qhc)
     endif (QCOLLECTIONGENERATOR_EXECUTABLE)
 endif (QHELPGENERATOR_EXECUTABLE)
+
+add_dependencies(doc.qhc doc.guide.en.qhc doc.qhc.collection)
