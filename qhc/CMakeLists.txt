@@ -22,23 +22,36 @@ endforeach(lang)
 
 find_program(QHELPGENERATOR_EXECUTABLE qhelpgenerator)
 if (QHELPGENERATOR_EXECUTABLE)
-  set(DOC_COLLECTION_PROJECT_FILE "dff_doc.qhcp")
-  set(DOC_COLLECTION_FILE "dff_doc.qhc")
   foreach (lang ${DFF_GUIDE_LANGUAGES})
+    configure_file(
+                   ${CMAKE_CURRENT_SOURCE_DIR}/../guide/dff_guide_${lang}.qhp.in
+                   ${CMAKE_CURRENT_BINARY_DIR}/../guide/dff_guide_${lang}.qhp
+                   @ONLY
+                  )
     add_custom_target(doc.guide.${lang}.qhc
                       DEPENDS doc.guide.${lang}.html
-                      COMMAND ${QHELPGENERATOR_EXECUTABLE} dff_guide_${lang}.qhp -o ../qhc/dff_guide_${lang}.qch 
-                      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../guide
+                      COMMAND ${QHELPGENERATOR_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/../guide/dff_guide_${lang}.qhp -o ${CMAKE_CURRENT_BINARY_DIR}/dff_guide_${lang}.qch 
+                      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../guide
                      )
-    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES dff_guide_${lang}.qch) 
+    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_SOURCE_DIR}dff_guide_${lang}.qch) 
   endforeach(lang)
+
 
   find_program(QCOLLECTIONGENERATOR_EXECUTABLE qcollectiongenerator)
   if (QCOLLECTIONGENERATOR_EXECUTABLE)
+
+  set(DOC_COLLECTION_PROJECT_FILE_IN "dff_doc.qhcp.in")
+  set(DOC_COLLECTION_PROJECT_FILE "dff_doc.qhcp")
+  set(DOC_COLLECTION_FILE "dff_doc.qhc")
+  configure_file(
+                 ${CMAKE_CURRENT_SOURCE_DIR}/${DOC_COLLECTION_PROJECT_FILE_IN}
+                 ${CMAKE_CURRENT_BINARY_DIR}/${DOC_COLLECTION_PROJECT_FILE}
+                 @ONLY
+                )
   add_custom_target(doc.qhc.collection
                     DEPENDS ${QHC_GUIDE_DEPENDENCIES} doc.developer.qch
-                    COMMAND ${QCOLLECTIONGENERATOR_EXECUTABLE} ${DOC_COLLECTION_PROJECT_FILE} -o ${DOC_COLLECTION_FILE} 
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                    COMMAND ${QCOLLECTIONGENERATOR_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/${DOC_COLLECTION_PROJECT_FILE} -o ${DOC_COLLECTION_FILE} 
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                    )
   set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${DOC_COLLECTION_FILE};${DOC_QCH_OUTPUT_FILE};${QCH_GUIDE_FILES}")
   endif (QCOLLECTIONGENERATOR_EXECUTABLE)

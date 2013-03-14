@@ -12,13 +12,20 @@
 # Author(s):
 #  Solal Jacob <sja@digital-forensic.org>
 
+#COPY RESOURCE & CSS POUR LE HTML !
+
 macro(GENERATE_GUIDE lang)
   if (BUILD_DFF_GUIDE_HTML)
     find_package(Docbook)
     include (${Docbook_USE_FILE})
     include (UseDocbook)
     set (DFF_GUIDE_MAIN_XML_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../xml/main.xml")
-    docbook_generate (html "${DFF_GUIDE_MAIN_XML_FILE}" XSLT_FILES_HTML)
+
+    if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
+      file(COPY ../resources DESTINATION ../)
+    endif (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
+
+    docbook_generate(html "${DFF_GUIDE_MAIN_XML_FILE}" XSLT_FILES_HTML)
     foreach (file ${XSLT_FILES_HTML})
       list (APPEND DFF_GUIDE_${lang}_FILES ${file})
       install (

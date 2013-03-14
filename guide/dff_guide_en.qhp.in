@@ -11,14 +11,13 @@
     <filterAttribute>DFF Guide</filterAttribute>
     <filterAttribute>1.3.0</filterAttribute>
     <toc>
-      <section title="DFF Guide" ref="html/index.html">
-          <section title="Chapter 1" ref="html/ch01.html"/>
+      <section title="DFF Guide" ref="en/html/index.html">
+          <section title="Chapter 1" ref="en/html/ch01.html"/>
       </section>
     </toc>
     <files>
-      <file>xml/guide.css</file>
-      <file>html/*.html</file>
-      <file>resources/*</file>
+      <file>en/resources/*</file>
+      <file>en/html/*.html</file>
     </files>
   </filterSection>
 </QtHelpProject>

@@ -16,7 +16,6 @@
       </section>
     </toc>
     <files>
-      <file>en/xml/guide.css</file>
       <file>en/resources/*</file>
       <file>fr/html/*.html</file>
    </files>
