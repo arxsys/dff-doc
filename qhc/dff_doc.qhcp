@@ -3,6 +3,7 @@
   <docFiles>
     <register>
      <file>dff_guide_en.qch</file>
+     <file>dff_guide_fr.qch</file>
      <file>dff_developer.qch</file>
    </register>
   </docFiles>

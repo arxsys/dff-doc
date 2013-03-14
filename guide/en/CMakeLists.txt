@@ -12,6 +12,4 @@
 # Author(s):
 #  Solal Jacob <sja@digital-forensic.org>
 
-add_custom_target(doc.guide.en)
-add_dependencies(doc.guide doc.guide.en)
 add_subdirectory(html)

@@ -38,7 +38,8 @@ if (DOXYGEN_FOUND)
   set (DOC_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
   set (DOC_LOGO_FILE ${CMAKE_SOURCE_DIR}/"ressources/dff.png")
   set (DOC_HTML_OUTPUT_FILE "index.html")
-  set (DOC_QCH_OUTPUT_FILE "../../qhc/dff_developer.qch")
+  set (DOC_QCH_OUTPUT_FILE "dff_developer.qch")
+  set (DOC_QCH_OUTPUT_FILE_REL "../../qhc/${DOC_QCH_OUTPUT_FILE}")
   set (DOC_LATEX_OUTPUT_FILE "refman.tex")
 
   foreach (type ${DOC_OUTPUT_TYPES})
@@ -61,8 +62,7 @@ if (DOXYGEN_FOUND)
       DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" ${SOURCES}
       VERBATIM
   )
-
-  set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "html;${DOC_QCH_OUTPUT_FILE}")
+  set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "html;${DOC_QCH_OUTPUT_FILE_REL}")
 
   install (DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
     DESTINATION ${DOCUMENTATION_INSTALL_DIR}

@@ -12,14 +12,47 @@
 # Author(s):
 #  Solal Jacob <sja@digital-forensic.org>
 
+macro(GENERATE_GUIDE lang)
+  if (BUILD_DFF_GUIDE_HTML)
+    find_package(Docbook)
+    include (${Docbook_USE_FILE})
+    include (UseDocbook)
+    set (DFF_GUIDE_MAIN_XML_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../xml/main.xml")
+    docbook_generate (html "${DFF_GUIDE_MAIN_XML_FILE}" XSLT_FILES_HTML)
+    foreach (file ${XSLT_FILES_HTML})
+      list (APPEND DFF_GUIDE_${lang}_FILES ${file})
+      install (
+        FILES ${CMAKE_CURRENT_BINARY_DIR}/${file}
+	DESTINATION ${DOCUMENTATION_INSTALL_DIR}
+	PERMISSIONS OWNER_READ OWNER_WRITE
+                  GROUP_READ
+                  WORLD_READ
+        COMPONENT documentation
+        OPTIONAL
+        )
+    endforeach ( file )
+  endif (BUILD_DFF_GUIDE_HTML)
+
+  if (DFF_GUIDE_${lang}_FILES)
+    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "*.html")
+    add_custom_target(doc.guide.${lang}.html DEPENDS ${DFF_GUIDE_${lang}_FILES})
+    add_dependencies(doc.guide.${lang} doc.guide.${lang}.html)
+  endif (DFF_GUIDE_${lang}_FILES)
+endmacro()
+
 find_package (Docbook)
 if (Docbook_FOUND)
   include (${Docbook_USE_FILE})
   option (BUILD_DFF_GUIDE_HTML "Build HTML application guide" ON)
   option (BUILD_DFF_GUIDE_QCH  "Build QCH application guide" ON)
+
   add_custom_target(doc.guide)
   add_dependencies(doc.guide doc)
-  add_subdirectory(en)
+
+  foreach (lang ${DFF_GUIDE_LANGUAGES})
+    add_custom_target(doc.guide.${lang})
+    add_dependencies(doc.guide doc.guide.${lang})
+    add_subdirectory(${lang})
+  endforeach (lang)
+
 endif (Docbook_FOUND)
-
-
