@@ -17,6 +17,7 @@ option(DOC_GENERATE "Generate documentation" OFF)
 if (DOC_GENERATE)
   add_custom_target(doc)
   add_dependencies(dff doc)
+  set(DOC_INSTALL_DIR ${CMAKE_INSTALL_ORIG_PREFIX}/share/doc/${CMAKE_PROJECT_NAME}-${PROJECT_VERSION})
 
 #
 ### DOXYGEN / DOC DEVELOPER CONFIGURATION
@@ -64,6 +65,7 @@ if (DOC_GENERATE)
   set(DOC_GUIDE_QHP_FILES_FR "en/resources/*" "fr/html/*.html")
   
   # Common settings
+  set(DOC_GUIDE_XML_MAIN_FILE "main.xml")
   set(DOC_GUIDE_QHP_VIRTUAL_FOLDER "doc")
   set(DOC_GUIDE_QHP_FILE_NAME_PREFIX "dff_guide")
   set(DOC_GUIDE_QHP_NAMESPACE_PREFIX "org.digital-forensic")

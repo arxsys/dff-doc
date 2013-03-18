@@ -30,21 +30,20 @@ if(DOC_GENERATE_DEVELOPER)
       add_dependencies (doc.developer doc.developer.${type_low})
       list (APPEND DOC_DEVELOPER_OUTPUT_FILES_ABS "${DOC_DEVELOPER_${type}_OUTPUT_FILE_ABS}")
     endforeach (type)
-    configure_file (
-      ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
-      ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-      @ONLY)
+    configure_file (${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
+                    ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+                    @ONLY)
 
-    add_custom_command (
-      OUTPUT ${DOC_DEVELOPER_OUTPUT_FILES_ABS}
-      COMMAND "${DOXYGEN_EXECUTABLE}" "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
-      DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" ${DOC_DEVELOPER_SOURCES}
-      VERBATIM)
+    add_custom_command (OUTPUT ${DOC_DEVELOPER_OUTPUT_FILES_ABS}
+                        COMMAND "${DOXYGEN_EXECUTABLE}" "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
+                        DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" ${DOC_DEVELOPER_SOURCES}
+                        VERBATIM)
     set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "html;${DOC_DEVELOPER_QCH_OUTPUT_FILE_REL}")
 
-    install (DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
-      DESTINATION ${DOCUMENTATION_INSTALL_DIR}
-      COMPONENT documentation)
+    install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
+            DESTINATION ${DOC_INSTALL_DIR}/developer
+            COMPONENT doc
+            OPTIONAL)
   else(DOXYGEN_FOUND)
     set(DOC_GENERATE_DEVELOPER OFF)
   endif(DOXYGEN_FOUND)

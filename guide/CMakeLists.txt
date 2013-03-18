@@ -17,26 +17,27 @@ macro(GENERATE_GUIDE lang)
     find_package(Docbook)
     include (${Docbook_USE_FILE})
     include (UseDocbook)
-    set (DOC_GUIDE_MAIN_XML_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../xml/main.xml")
+    set (DOC_GUIDE_XML_MAIN_FILE_ABS "${CMAKE_CURRENT_SOURCE_DIR}/../xml/${DOC_GUIDE_XML_MAIN_FILE}")
 
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
       file(COPY ../resources DESTINATION ../)
+      install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../resources"
+              DESTINATION ${DOC_INSTALL_DIR}/guide/${lang}/
+              COMPONENT documentation
+              OPTIONAL)
+
     endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
 
-    docbook_generate(html "${DOC_GUIDE_MAIN_XML_FILE}" XSLT_FILES_HTML)
+    docbook_generate(html "${DOC_GUIDE_XML_MAIN_FILE_ABS}" XSLT_FILES_HTML)
     foreach(file ${XSLT_FILES_HTML})
       list(APPEND DOC_GUIDE_${lang}_FILES ${file})
-      install(
-        FILES ${CMAKE_CURRENT_BINARY_DIR}/${file}
-	DESTINATION ${DOCUMENTATION_INSTALL_DIR}
-	PERMISSIONS OWNER_READ OWNER_WRITE
-                  GROUP_READ
-                  WORLD_READ
-        COMPONENT documentation
-        OPTIONAL)
     endforeach(file)
 
     if(DOC_GUIDE_${lang}_FILES)
+      install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+	      DESTINATION ${DOC_INSTALL_DIR}/guide/${lang}/
+              COMPONENT documentation
+              OPTIONAL)
       set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "*.html")
       add_custom_target(doc.guide.${lang}.html DEPENDS ${DOC_GUIDE_${lang}_FILES})
       add_dependencies(doc.guide.${lang} doc.guide.${lang}.html)
