@@ -12,7 +12,7 @@
 # Author(s):
 #  Solal Jacob <sja@digital-forensic.org>
 
-option(DOC_GENERATE "Generate documentation" ON) #OFF
+option(DOC_GENERATE "Generate documentation" OFF)
 
 if (DOC_GENERATE)
   add_custom_target(doc)
