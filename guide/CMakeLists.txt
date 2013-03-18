@@ -12,54 +12,67 @@
 # Author(s):
 #  Solal Jacob <sja@digital-forensic.org>
 
-#COPY RESOURCE & CSS POUR LE HTML !
-
 macro(GENERATE_GUIDE lang)
-  if (BUILD_DFF_GUIDE_HTML)
+  if(DOC_GENERATE_GUIDE_HTML)
     find_package(Docbook)
     include (${Docbook_USE_FILE})
     include (UseDocbook)
-    set (DFF_GUIDE_MAIN_XML_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../xml/main.xml")
+    set (DOC_GUIDE_MAIN_XML_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../xml/main.xml")
 
-    if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
       file(COPY ../resources DESTINATION ../)
-    endif (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
+    endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
 
-    docbook_generate(html "${DFF_GUIDE_MAIN_XML_FILE}" XSLT_FILES_HTML)
-    foreach (file ${XSLT_FILES_HTML})
-      list (APPEND DFF_GUIDE_${lang}_FILES ${file})
-      install (
+    docbook_generate(html "${DOC_GUIDE_MAIN_XML_FILE}" XSLT_FILES_HTML)
+    foreach(file ${XSLT_FILES_HTML})
+      list(APPEND DOC_GUIDE_${lang}_FILES ${file})
+      install(
         FILES ${CMAKE_CURRENT_BINARY_DIR}/${file}
 	DESTINATION ${DOCUMENTATION_INSTALL_DIR}
 	PERMISSIONS OWNER_READ OWNER_WRITE
                   GROUP_READ
                   WORLD_READ
         COMPONENT documentation
-        OPTIONAL
-        )
-    endforeach ( file )
-  endif (BUILD_DFF_GUIDE_HTML)
+        OPTIONAL)
+    endforeach(file)
 
-  if (DFF_GUIDE_${lang}_FILES)
-    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "*.html")
-    add_custom_target(doc.guide.${lang}.html DEPENDS ${DFF_GUIDE_${lang}_FILES})
-    add_dependencies(doc.guide.${lang} doc.guide.${lang}.html)
-  endif (DFF_GUIDE_${lang}_FILES)
+    if(DOC_GUIDE_${lang}_FILES)
+      set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "*.html")
+      add_custom_target(doc.guide.${lang}.html DEPENDS ${DOC_GUIDE_${lang}_FILES})
+      add_dependencies(doc.guide.${lang} doc.guide.${lang}.html)
+    endif(DOC_GUIDE_${lang}_FILES)
+  endif(DOC_GENERATE_GUIDE_HTML)
 endmacro()
 
-find_package (Docbook)
-if (Docbook_FOUND)
-  include (${Docbook_USE_FILE})
-  option (BUILD_DFF_GUIDE_HTML "Build HTML application guide" ON)
-  option (BUILD_DFF_GUIDE_QCH  "Build QCH application guide" ON)
+find_package(Docbook)
+if(Docbook_FOUND)
+  if (DOC_GENERATE_GUIDE_HTML)
+    include (${Docbook_USE_FILE})
 
-  add_custom_target(doc.guide)
-  add_dependencies(doc.guide doc)
+    add_custom_target(doc.guide)
+    add_dependencies(doc.guide doc)
 
-  foreach (lang ${DFF_GUIDE_LANGUAGES})
-    add_custom_target(doc.guide.${lang})
-    add_dependencies(doc.guide doc.guide.${lang})
-    add_subdirectory(${lang})
-  endforeach (lang)
+    foreach(lang ${DOC_GUIDE_LANGUAGES})
+      add_custom_target(doc.guide.${lang})
+      add_dependencies(doc.guide doc.guide.${lang})
+      add_subdirectory(${lang})
 
-endif (Docbook_FOUND)
+      string(TOUPPER "${lang}" lang_up)
+      if(DOC_GENERATE_GUIDE_QHP)
+        set(DOC_GUIDE_QHP_NAMESPACE "${DOC_GUIDE_QHP_NAMESPACE_PREFIX}.${DOC_GUIDE_QHP_FILE_NAME_PREFIX}_${lang}")
+        set(DOC_GUIDE_QHP_SECTION_MAIN_NAME ${DOC_GUIDE_QHP_SECTION_MAIN_NAME_${lang_up}})
+        set(DOC_GUIDE_QHP_TOC "<section title=\"${DOC_GUIDE_QHP_SECTION_MAIN_NAME}\" ref=\"${lang}/html/index.html\"></section>")
+        foreach(file ${DOC_GUIDE_QHP_FILES_${lang_up}})
+          list(APPEND DOC_GUIDE_QHP_FILES "<file>${file}</file>")
+        endforeach(file)
+        string(REPLACE ";" "" DOC_GUIDE_QHP_FILES "${DOC_GUIDE_QHP_FILES}")
+
+        configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${DOC_GUIDE_QHP_FILE_NAME_PREFIX}.qhp.in
+                   ${CMAKE_CURRENT_BINARY_DIR}/${DOC_GUIDE_QHP_FILE_NAME_PREFIX}_${lang}.qhp
+                   @ONLY)
+      endif(DOC_GENERATE_GUIDE_QHP)
+    endforeach(lang)
+  endif(DOC_GENERATE_GUIDE_HTML)
+else(Docbook_FOUND)
+  set(DOC_GENERATE_GUIDE_HTML OFF)
+endif(Docbook_FOUND)

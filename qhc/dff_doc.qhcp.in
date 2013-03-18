@@ -2,9 +2,7 @@
 <QHelpCollectionProject version="1.0">
   <docFiles>
     <register>
-     <file>dff_guide_en.qch</file>
-     <file>dff_guide_fr.qch</file>
-     <file>dff_developer.qch</file>
+      @DOC_QHC_COLLECTION_FILES_XML@
    </register>
   </docFiles>
 </QHelpCollectionProject>
