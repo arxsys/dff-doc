@@ -17,7 +17,7 @@ body
     font-family: sans;
 }
 
-p, li, ul, ol, dd, dt
+li, ul, ol, dd, dt
 {
     font-style: normal;
     font-weight: normal;
@@ -92,11 +92,6 @@ h4.title
     color: black;
 }
 
-strong
-{
-    font-weight: normal;
-}
-
 .toc b
 {
     font-family: sans-serif;
@@ -116,6 +111,12 @@ strong
     font-family: monospace;
     font-style: normal;
     font-weight: normal;
+}
+
+.caption
+{
+	font-style : italic;
+	color : #3366CC;
 }
 
 .userinput

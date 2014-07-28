@@ -40,8 +40,8 @@
 <book lang="en">
  	<title>Digital Forensics Framework guide</title>
   	<subtitle>How to use DFF</subtitle>
-	        &intro;
-                <!--&community; //tracker etc-->
+            <!-- &intro; -->
+            <!--&community; //tracker etc-->
         <chapter>
                 <title>Installation</title>
                 &install_linux;

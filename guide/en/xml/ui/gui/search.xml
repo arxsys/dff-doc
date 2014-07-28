@@ -1,0 +1,93 @@
+<section id="search">
+	<title>Search</title>
+
+	<para> In the previous section "Toolbar" we saw the search function, if you don't remember. Don't worry, the window is here too  </para>
+
+	<mediaobject>
+		<imageobject>
+			<imagedata fileref="images/gui/search_window.png"/>
+		</imageobject>
+		<caption> The research window</caption>
+	</mediaobject>
+
+	<para> Let's see what can we do. You can choose how the search engine will act with 4 options :</para>
+			<itemizedlist>
+			<listitem>
+				<para>
+					<emphasis>Fixed string</emphasis> (Default) : The search engine will search char corresponding exactly to what you wrote in the search field.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<emphasis>Wildcard</emphasis> : Wildcards allow to use meta-characters. They simplify some rules.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<emphasis>Fuzzy</emphasis> : Approximative research. Allows to write a word and it will find all file with max 2 different letter ( For example if you search "<emphasis>test</emphasis>", files with name like "<emphasis>tust</emphasis>" or "<emphasis>teet</emphasis>" will be find).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<emphasis>RegExp</emphasis> (Regular expression) : Allows to define a "search models", and all the files with a similar name will be shown. (For example you can do a research with filename starting with "a" and ends with "b").
+				</para>
+			</listitem>
+		</itemizedlist>
+
+	<para> The option "Search from root" as the name suggest, it will apply the research from root. </para>
+
+	<sect2>
+		<title>Advanced Research</title>
+		<para>Previously we seen how to make a quick research, but you can make a research with more options/conditions. To do that, jsut click on <inlinemediaobject><imageobject><imagedata fileref="images/icons/actions/add.png" width="24"/></imageobject></inlinemediaobject>. This will open a <link linkend="advanced_research">new window</link> in which you can add somes rules.</para>
+
+		<mediaobject id="advanced_research">
+			<imageobject>
+				<imagedata fileref="images/gui/advanced_research.png"/>
+			</imageobject>
+		</mediaobject>
+
+		<para>On the dropdown menu of this window you can specify your option :</para>
+		<table id="search_option"><title> Search option</title>
+		<tgroup cols="2" align="left">
+		<tbody>
+			<row>
+				<entry align="center"><para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/gui/option_search.png"/>
+						</imageobject>
+					</mediaobject></para>
+				</entry>
+				<entry>
+					<itemizedlist mark="none">
+						<listitem><emphasis>Name</emphasis> : Add a name option</listitem>
+						<listitem><emphasis>Contains</emphasis> : It will search if files contain this character</listitem>
+						<listitem><emphasis>Size</emphasis> : Add a size rule ( you can specifiy KB, MB or GB and if it's less-than, greater-than, ≤, ≥, == or !=)</listitem>
+						<listitem><emphasis>Date</emphasis> : Add a specific date ( with option less-than, greater-than, ≤, ≥, == or !=)</listitem>
+						<listitem><emphasis>Mime type</emphasis> : Add a specific mime type (text, audio, message, video...)</listitem>
+						<listitem><emphasis>Dictionnary</emphasis> : Add a list of key-word</listitem>
+						<listitem><emphasis>is deleted</emphasis> : Specify if the file is delete or not</listitem>
+						<listitem><emphasis>is file</emphasis> : Specify if it's a file or not</listitem>
+						<listitem><emphasis>Attribute</emphasis> : Search specify attributes</listitem>
+						<listitem><emphasis>Path</emphasis> : Add a path </listitem>
+						<listitem><emphasis>Extension</emphasis> : add a specific extension</listitem>
+						<listitem><emphasis>Expression</emphasis> : Add a new expression to your research</listitem>
+					</itemizedlist>
+				</entry>
+			</row>	
+		</tbody>
+		</tgroup>
+		</table>
+	<sect3>
+		<title> Wildcards</title>
+		<para> Previously we talk about wildcard, but what it mean exactly. Wildcards are meta-characters who represent other characters. Let's take an example : Imagine you want search all the files with .PDF extension as "file_name.PDF". It can be useful to replace that "file_name" by something more usual.</para>
+		<para>Meta-character can be use here, the previous research can be replace by "<emphasis>*</emphasis>.PDF", where <emphasis>*</emphasis> can be "<emphasis>0, 1, or many characters</emphasis>". In other words that research can match files like : 
+			<itemizedlist>
+				<listitem>.PDF (0 character)</listitem>
+				<listitem>a.PDF (1 character)</listitem>
+				<listitem>abc.PDF (many characters)</listitem>
+			</itemizedlist></para>
+		<para> The send meta-character is "<emphasis>?</emphasis>". This one represente <emphasis>0 or 1 character</emphasis>, ie the research "rese?rch" will search things like : reserch (0 caractère), reseArch (1 caractère), but will not find 'reseaarch' (2 caractères).</para>
+	</sect3>
+	</sect2>
+</section>
