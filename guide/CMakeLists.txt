@@ -19,14 +19,25 @@ macro(GENERATE_GUIDE lang)
     include (UseDocbook)
     set (DOC_GUIDE_XML_MAIN_FILE_ABS "${CMAKE_CURRENT_SOURCE_DIR}/../xml/${DOC_GUIDE_XML_MAIN_FILE}")
 
+
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
-      file(COPY ../resources DESTINATION ../)
+      file(COPY ../resources DESTINATION .)
       install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../resources"
               DESTINATION ${DOC_INSTALL_DIR}/guide/${lang}/
               COMPONENT documentation
               OPTIONAL)
-
     endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../resources")
+
+
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../images")
+      file(COPY ../images DESTINATION .)
+      install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../images"
+              DESTINATION ${DOC_INSTALL_DIR}/guide/${lang}/
+              COMPONENT documentation
+              OPTIONAL)
+
+    endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../images")
+
 
     docbook_generate(html "${DOC_GUIDE_XML_MAIN_FILE_ABS}" XSLT_FILES_HTML)
     foreach(file ${XSLT_FILES_HTML})
