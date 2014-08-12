@@ -28,59 +28,46 @@
 <!ENTITY modules_fs_fatfs SYSTEM "modules/fs/fatfs.xml">
 ]>
 <book lang="messages">
- 	<title lang="en">Digital Forensics Framework guide</title>
-  	<subtitle lang="en">How to use DFF</subtitle>
+ 	<title lang="fr">Guide de Digital Forensics Framework</title>
+  	<subtitle lang="fr">Comment utiliser DFF</subtitle>
 	        
                 <!--&community; //tracker etc-->
         <chapter>
-                <title lang="en">Installation</title>
+                <title lang="fr">Installation</title>
                 
                 
         </chapter>
 
         <chapter>
-                <title lang="en">User interfaces</title>
+                <title lang="fr">Interfaces graphiques</title>
                 <!--&ui_overview; launch-->
                 
         </chapter>      
  
         <chapter>
-                <title lang="en">Console</title> 
+                <title lang="fr">Console</title> 
                 
                 
         </chapter>
         
         <chapter>
-                <title lang="en">Graphical interface</title>
+                <title lang="fr">Interface Graphique</title>     
                 
+        </chapter>
+
+        <chapter>
+                <title lang="fr">Modules</title>
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+        </chapter>
+
+        <chapter>
+                <title lang="fr">Builtins</title>
                 
                 
         </chapter>
 
         <chapter>
-                <title lang="en">Modules</title>
-                
-        </chapter>
-
-        <chapter>
-                <title lang="en">Builtins</title>
-                
-                
-        </chapter>
-
-        <chapter>
-                <title lang="en">File system modules</title>
+                <title lang="fr">File system modules</title>
                 
                 
                 
