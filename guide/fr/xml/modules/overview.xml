@@ -28,7 +28,7 @@
 			</listitem>
 		</itemizedlist>
 		<para> Une architecture telle que celle de DFF permet l'intégration et l'ajout de fonctionnalités de façon rapide, en réutilisant le code commun se trouvant dans l'API.</para>
-		<para>ATous les modules de DFF reposent sur des principes communs, et peuvent disposer d'une ou plusieurs des fonctionnalités suivantes : </para>
+		<para>Tous les modules de DFF reposent sur des principes communs, et peuvent disposer d'une ou plusieurs des fonctionnalitées suivantes : </para>
 		<itemizedlist mark="opencircle">
 			<listitem>Être écrits en C, C++ ou python</listitem>
 			<listitem>Être configurable </listitem>

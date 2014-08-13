@@ -7,7 +7,7 @@
 		<imageobject>
 			<imagedata fileref="images/gui/shell_tab.png"/>
 		</imageobject>
-		<caption> TLe terminal de DFF</caption>
+		<caption> Le terminal de DFF</caption>
 	</mediaobject>
 
 	<para> Vous remarquerez qu'un nouvel onglet est apparu, juste à côté de l'onglet Scanner.</para>

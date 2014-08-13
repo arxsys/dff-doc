@@ -1,7 +1,7 @@
 <section id="bookmark">
 	<title>Bookmark</title>
 
-	<para> Dans la section précédente nous avons vue les "bookmark" (marque-page), voyons comment cela fonctionne</para>
+	<para> Dans la section précédente nous avons vue les "bookmark" (favoris), voyons comment cela fonctionne</para>
 
 
 	<mediaobject>
@@ -9,7 +9,7 @@
 				<imagedata fileref="images/gui/bookmark_name_fr.png"/>
 			</imageobject>
 			<caption>
-				<para>Vous écrivez ici le nom de la catégorie de votre marque-page, puis cliquer sur <emphasis>OK</emphasis>.</para>
+				<para>Vous écrivez ici le nom de la catégorie de votre favoris, puis cliquer sur <emphasis>OK</emphasis>.</para>
 			</caption>
 	</mediaobject>
 

@@ -1,7 +1,7 @@
 <section id="tool_bar">
 	<title> Barre d'outils</title>
 
-	<para>Dans cette section nous allons expliquer ce que peut faire chaque boutton</para>
+	<para>Dans cette section nous allons expliquer ce que peut faire chaque bouton</para>
 
 		<table id="detailled_toolbar"><title> Barre d'outils détaillé</title>
 	<tgroup cols="2" align="left">
@@ -54,7 +54,7 @@
 					</imageobject>
 				</mediaobject></para>
 			</entry>
-			<entry>Ajoute un <link linkend="bookmark">Marque-Page</link></entry>
+			<entry>Ajoute un <link linkend="bookmark">Favoris</link></entry>
 		</row>		
 		<row>
 			<entry align="center">	<para>

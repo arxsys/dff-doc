@@ -38,7 +38,7 @@
 
 	<sect2>
 		<title>Recherche avancée</title>
-		<para>Nous avons explique dans la partie précédente comment effectuer une recherche basique, basée sur les noms de fichier. Cependant, DFF permet de faire des recherches beaucoup plus précises. Premièrement, il est possible d'effectuer des recherches sur d'autres attributs que le nom des noeuds, notamment la taille, les dates, le contenu, et tous les attributs des noeuds. Pour cela, il faut cliquer sur l'icône <inlinemediaobject><imageobject><imagedata fileref="images/icons/actions/add.png" width="24"/></imageobject></inlinemediaobject>. Ce la va ouvrir une <link linkend="advanced_research">nouvelle fenêtre</link> dans laquelle vous pourrez ajjouter des clauses</para>
+		<para>Nous avons explique dans la partie précédente comment effectuer une recherche basique, basée sur les noms de fichier. Cependant, DFF permet de faire des recherches beaucoup plus précises. Premièrement, il est possible d'effectuer des recherches sur d'autres attributs que le nom des noeuds, notamment la taille, les dates, le contenu, et tous les attributs des noeuds. Pour cela, il faut cliquer sur l'icône <inlinemediaobject><imageobject><imagedata fileref="images/icons/actions/add.png" width="24"/></imageobject></inlinemediaobject>. Ce la va ouvrir une <link linkend="advanced_research">nouvelle fenêtre</link> dans laquelle vous pourrez ajouter des clauses</para>
 
 		<mediaobject id="advanced_research">
 			<imageobject>
