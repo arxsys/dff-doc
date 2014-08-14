@@ -41,6 +41,18 @@
 				<listitem><emphasis>Chaînes de caractères</emphasis>
 					<para>Les chaînes de caractères sont représentés de beaucoup de façon, qui dépende de la syntaxe utilisé. Par défaut toute les châines de caractères ne sont pas sensibles à la casse.</para>
 					<itemizedlist mark="opencircle">
+						<listitem><emphasis>Chaîne fixe</emphasis>
+							<para>est reconnu quand ce qui est écrit est entre double guillements : <emphasis>"Je suis une chaîne fixe"</emphasis>. Les chaînes fixes implique que la comparaison sera effectué sur ce que vous avez écrit à l'identique.</para>
+						</listitem>							
+						<listitem><emphasis>Wildcard</emphasis>
+							<para>est reconnu quand c'est entouré avec des dollars: <emphasis>$*.extension$</emphasis>. L'expression des wildcards ne supporte que les asterisques ( zéro ou plusieurs caractères) et les point d'interrogations (un seul caractère) mais sera améliorer pour convenir à l'expression de la wildcard.</para>
+						</listitem>							
+						<listitem><emphasis>RegExp</emphasis>
+							<para>est reconnu quand il est encadré par des slash. <emphasis>/[a-zA-Z0-9\-\._]+@[a-zA-Z0-9\-\.]+\.[a-z]{2,6}/</emphasis> est un exemple pour trouver une addresse mail. Pour le moment les expression régulière ne supporte pas directement l'unicode mais est lié avec la librairie lightgrep compatible pour la version 1.4.</para>
+						</listitem>							
+						<listitem><emphasis>Recherche approximative</emphasis>
+							<para>Qui s'appuie sur la <ulink url="https://github.com/laurikari/tre/"><citetitle>librairie tre</citetitle></ulink>, elle est utilisable en entourant votre mot-clé avec des tild, par exemple : <emphasis>~password~</emphasis> Va vous trouvez des mots mal ortographiés. Amélioré pour la version 1.4, les chaines approximatives repose sur la "Levenshtein distance", une interface graphique sera fournie pour changer les différentes insertion, suppression, subsitution.</para>
+						</listitem>											
 						<listitem>
 							<emphasis>Des listes de patterns</emphasis> sont aussi supporté par le moteur de recherche. Cela permet d'ajouter une capacité à compter mais également de réduire la longueur de la requête et amélioré ça lecture. Les syntaxes possibles sont les suivantes :
 							<itemizedlist mark="square">

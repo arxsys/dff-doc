@@ -112,7 +112,7 @@
 
 	<sect2>
 		<title>Advanced Research</title>
-		<para>Previously we've seen how to make a quick research, but you can make a research with more options/conditions. To do that, jsut click on <inlinemediaobject><imageobject><imagedata fileref="images/icons/actions/add.png" width="24"/></imageobject></inlinemediaobject>. This will open a <link linkend="advanced_research">new window</link> in which you can add somes rules.</para>
+		<para>Previously we've seen how to make a quick research, but you can make a research with more options/conditions. To do that, just click on <inlinemediaobject><imageobject><imagedata fileref="images/icons/actions/add.png" width="24"/></imageobject></inlinemediaobject>. This will open a <link linkend="advanced_research">new window</link> in which you can add somes rules.</para>
 
 		<mediaobject id="advanced_research">
 			<imageobject>
