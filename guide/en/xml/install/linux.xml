@@ -46,7 +46,7 @@
 		<para>Then you can download the package and install it : </para>
 		<screen>
 			$ wget http://www.arxsys.fr/media/downloads/1.3.0/dff_1.3.0_i386.deb 
-			$ sudo dpkg -i dff_1.3.0_i386.deb≤/nowiki≥ (change ≤≥ to simple less-than and greater-than)
+			$ sudo dpkg -i dff_1.3.0_i386.deb&lt;/nowiki&gt;
 		</screen>
 		<para>If everything is ok, you can then type in your terminal dff (console mode) or dff-gui (graphical interface). There's also an entry in your menu bar under Accessories starting the graphical interface.</para>
 		</sect3>
