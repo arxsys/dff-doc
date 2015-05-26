@@ -1,7 +1,4 @@
 <section>
 	<title>Interpreter</title>
-
-	<para> blabla </para>
-
-
+	<para>The interpreter let you access DFF object directly from a python interpreter</para>
 </section>
